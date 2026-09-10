@@ -26,6 +26,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f4f6f9;
@@ -195,7 +206,7 @@
         </div>
 
         <!-- MAIN DATA TABLE -->
-        <div class="overflow-x-auto rounded-lg border border-slate-300 bg-white mb-8">
+        <div class="overflow-x-auto rounded-lg border border-slate-300 bg-white mb-8" style="width: 100%; height: auto;">
             <table id="mainTable" class="text-xs text-slate-900">
                 <thead>
                     <!-- STATE CODES HEADER -->
