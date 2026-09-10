@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genehmigungsrechtliche Übersicht zu Erdwärmesonden in Norddeutschland</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandNavy: '#1b365d',
+                        brandNavyDark: '#132847',
+                        brandGreen: '#76a02d',
+                        brandGreenLight: '#f1f7e8',
+                        brandGreenMuted: '#5d8220',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+            color: #1e293b;
+        }
+
+        .poster-container {
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Table styling */
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        th, td {
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        .category-row {
+            background-color: #1b365d;
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+        }
+
+        .subcategory-label {
+            background-color: #f8fafc;
+            color: #1b365d;
+            font-weight: 600;
+            font-size: 0.8rem;
+            width: 180px;
+            min-width: 180px;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            border-right: 2px solid #cbd5e1;
+        }
+
+        .state-col {
+            width: calc((100% - 180px) / 8);
+            min-width: 180px;
+        }
+
+        /* Column highlight on hover/click */
+        .highlight-col {
+            background-color: #f0f7e6 !important;
+        }
+
+        /* Bullet lists in cells */
+        .cell-list {
+            list-style-type: disc;
+            padding-left: 1.1rem;
+            margin: 0;
+        }
+        .cell-list li {
+            margin-bottom: 0.3rem;
+            line-height: 1.35;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                font-size: 9pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .poster-container {
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+            @page {
+                size: A3 landscape;
+                margin: 8mm;
+            }
+            th, td {
+                padding: 4px 6px !important;
+                font-size: 8pt !important;
+            }
+            .subcategory-label {
+                width: 150px !important;
+                min-width: 150px !important;
+            }
+            .legal-badge {
+                padding: 2px 6px !important;
+                font-size: 8pt !important;
+            }
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6">
+
+    <!-- Action Toolbar (No Print) -->
+    <div class="no-print max-w-[1800px] mx-auto mb-4 bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-brandNavy text-white flex items-center justify-center font-bold text-xl">
+                <i data-lucide="file-text"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-slate-800">Erdwärmesonden Genehmigungsübersicht (Norddeutschland)</h1>
+                <p class="text-xs text-slate-500">Exakte Daten aus Regelwerken für 8 norddeutsche Bundesländer</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="searchInput" placeholder="Tabelle durchsuchen..." onkeyup="filterTable()" 
+                       class="pl-9 pr-4 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brandGreen w-64">
+            </div>
+
+            <button onclick="window.print()" class="flex items-center gap-2 bg-brandGreen hover:bg-brandGreenMuted text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                Als PDF / Poster drucken
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN POSTER CONTAINER -->
+    <div class="poster-container p-4 md:p-8 border border-slate-200">
+
+        <!-- POSTER HEADER -->
+        <div class="bg-brandNavy text-white p-6 rounded-t-xl relative overflow-hidden mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <!-- Decorative Accent Bar -->
+            <div class="absolute top-0 left-0 right-0 h-2 bg-brandGreen"></div>
+            
+            <div class="z-10">
+                <div class="inline-flex items-center gap-2 bg-brandGreen/20 text-brandGreenLight border border-brandGreen/40 text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Norddeutschland: BE, BB, HB, HH, MV, NI, ST, SH
+                </div>
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">GENEHMIGUNGSRECHTLICHE ÜBERSICHT</h1>
+                <h2 class="text-lg md:text-xl font-medium text-brandGreenLight mt-0.5">ZU ERDWÄRMESONDEN IN NORDDEUTSCHLAND</h2>
+                <p class="text-xs text-slate-300 mt-2">Vergleich zentraler Parameter zur Planung, Dimensionierung und Genehmigung nach Landesleitfäden</p>
+            </div>
+
+            <!-- Branding Emblem -->
+            <div class="z-10 flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10">
+                <div class="text-right">
+                    <span class="block text-xs font-bold text-slate-200 tracking-wider">REGELWERKE</span>
+                    <span class="block text-sm font-black text-brandGreen">GEOTHERMIE</span>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-brandGreen text-white flex items-center justify-center font-bold">
+                    <i data-lucide="compass" class="w-6 h-6"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN DATA TABLE -->
+        <div class="overflow-x-auto rounded-lg border border-slate-300 bg-white mb-8">
+            <table id="mainTable" class="text-xs text-slate-900">
+                <thead>
+                    <!-- STATE CODES HEADER -->
+                    <tr class="bg-brandNavy text-white">
+                        <th class="subcategory-label p-3 text-left !bg-brandNavy !text-white border-b-2 border-brandGreen">
+                            <span class="text-xs uppercase text-brandGreenLight font-semibold block">Parameter /</span>
+                            <span class="text-sm font-bold">Bundesland</span>
+                        </th>
+                        
+                        <!-- BE -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(1)">
+                            <div class="text-xl font-black text-white">BE</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Merkblatt Erdwärmenutzung<br>
+                                <span class="text-brandGreenLight">Stand: November 2025</span>
+                            </div>
+                        </th>
+
+                        <!-- BB -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(2)">
+                            <div class="text-xl font-black text-white">BB</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Leitfaden Geothermie<br>
+                                <span class="text-brandGreenLight">Stand: 2009</span>
+                            </div>
+                        </th>
+
+                        <!-- HB -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(3)">
+                            <div class="text-xl font-black text-white">HB</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Leitfaden Geothermie<br>
+                                <span class="text-brandGreenLight">Stand: Oktober 2022</span>
+                            </div>
+                        </th>
+
+                        <!-- HH -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(4)">
+                            <div class="text-xl font-black text-white">HH</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Leitfaden Geothermie<br>
+                                <span class="text-brandGreenLight">Stand: 2021</span>
+                            </div>
+                        </th>
+
+                        <!-- MV -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(5)">
+                            <div class="text-xl font-black text-white">MV</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Leitfaden geotherm. Nutzung<br>
+                                <span class="text-brandGreenLight">Stand: Dezember 2015</span>
+                            </div>
+                        </th>
+
+                        <!-- NI -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(6)">
+                            <div class="text-xl font-black text-white">NI</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Leitfaden Erdwärmenutzung<br>
+                                <span class="text-brandGreenLight">Stand: August 2022</span>
+                            </div>
+                        </th>
+
+                        <!-- ST -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(7)">
+                            <div class="text-xl font-black text-white">ST</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Info. Broschüre Erdwärme<br>
+                                <span class="text-brandGreenLight">Stand: März 2012</span>
+                            </div>
+                        </th>
+
+                        <!-- SH -->
+                        <th class="state-col p-3 text-center border-b-2 border-brandGreen cursor-pointer hover:bg-brandNavyDark" onclick="highlightColumn(8)">
+                            <div class="text-xl font-black text-white">SH</div>
+                            <div class="text-[10px] font-normal text-slate-300 mt-1 leading-tight">
+                                Leitfaden Geothermie<br>
+                                <span class="text-brandGreenLight">Stand: September 2011</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- CATEGORY: Grenzabstände [m] -->
+                    <tr class="category-row">
+                        <td colspan="9" class="p-2.5 px-4 bg-brandNavy text-brandGreenLight font-bold">
+                            Grenzabstände [m]
+                        </td>
+                    </tr>
+
+                    <!-- Sub: Grundstücksgrenze -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">Grundstücksgrenze</td>
+                        <td class="col-1 p-2.5 text-slate-900 font-medium">min. 10 m Abstand zur nächsten Bestandsanlage<br>min. 5 m zur Grundstücksgrenze, bzw. 3 m bei Sonden ≤100 m; im Einzelfall unterschreitbar</td>
+                        <td class="col-2 p-2.5 text-slate-900 font-medium">min. 0,5 m zu öffentlichen Straßenflächen</td>
+                        <td class="col-3 p-2.5 text-slate-900 font-medium">5 (Abweichung zu öffentlich genutzten Flächen möglich)</td>
+                        <td class="col-4 p-2.5 text-slate-900 font-medium">5 (bei Sondengruppen/-feldern größer)</td>
+                        <td class="col-5 p-2.5 text-slate-900 font-medium">5 (empfohlen, Abweichung möglich)</td>
+                        <td class="col-6 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (>50 m)</td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (>50 m)</td>
+                    </tr>
+
+                    <!-- Sub: Sonden -->
+                    <tr class="bg-slate-50/50">
+                        <td class="subcategory-label p-2.5">Sonden</td>
+                        <td class="col-1 p-2.5 text-slate-900 font-medium text-center">6</td>
+                        <td class="col-2 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (>50 m)</td>
+                        <td class="col-3 p-2.5 text-slate-900 font-medium text-center">6</td>
+                        <td class="col-4 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (>50 m)</td>
+                        <td class="col-5 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (50&lt;100 m)</td>
+                        <td class="col-6 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (>50 m)</td>
+                        <td class="col-7 p-2.5 text-slate-900 font-medium text-center">(empfohlen)</td>
+                        <td class="col-8 p-2.5 text-slate-900 font-medium">5 (≤50 m); 6 (>50 m)</td>
+                    </tr>
+
+                    <!-- Sub: Bestandsgebäude -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">Bestandsgebäude</td>
+                        <td class="col-1 p-2.5 text-slate-900 font-medium text-center">2</td>
+                        <td class="col-2 p-2.5 text-slate-900 font-medium">min. 1</td>
+                        <td class="col-3 p-2.5 text-slate-900 font-medium text-center">2</td>
+                        <td class="col-4 p-2.5 text-slate-900 font-medium">2 (empfohlen)</td>
+                        <td class="col-5 p-2.5"></td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+
+                    <!-- CATEGORY: Temperaturgrenzen [°C] -->
+                    <tr class="category-row">
+                        <td colspan="9" class="p-2.5 px-4 bg-brandNavy text-brandGreenLight font-bold">
+                            Temperaturgrenzen [°C]
+                        </td>
+                    </tr>
+
+                    <!-- Sub: T_min -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">T_min</td>
+                        <td class="col-1 p-2.5 text-slate-900">-3 bis -5 °C bei Spitzenlast</td>
+                        <td class="col-2 p-2.5 text-slate-900">0 °C im Monatsmittel</td>
+                        <td class="col-3 p-2.5 text-slate-900">Frostfreier Betrieb muss sichergestellt sein</td>
+                        <td class="col-4 p-2.5 text-slate-900">min. -3 °C am Wärmepumpenrücklauf</td>
+                        <td class="col-5 p-2.5 text-slate-900">Frostfreier Betrieb muss sichergestellt sein</td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+                    <!-- Sub: T_max -->
+                    <tr class="bg-slate-50/50">
+                        <td class="subcategory-label p-2.5">T_max</td>
+                        <td class="col-1 p-2.5 text-slate-900 font-medium">28 °C</td>
+                        <td class="col-2 p-2.5 text-slate-900">25 °C bei Spitzenlast</td>
+                        <td class="col-3 p-2.5 text-slate-900">20 °C im Monatsmittel</td>
+                        <td class="col-4 p-2.5 text-slate-900">20 °C</td>
+                        <td class="col-5 p-2.5 text-slate-900">25 °C sind max. 30 Tage im Jahr bei Spitzenlast zulässig</td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+                    <!-- Sub: ΔT_max -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">ΔT_max</td>
+                        <td class="col-1 p-2.5 text-slate-900">1 K an der Grundstücksgrenze</td>
+                        <td class="col-2 p-2.5 text-slate-900">Im Wochenmittel nicht mehr als ±11 K<br>Bei Spitzenlast nicht mehr als ±17 K von der ungestörten Untergrundtemperatur</td>
+                        <td class="col-3 p-2.5"></td>
+                        <td class="col-4 p-2.5 text-slate-900">Im Wochenmittel nicht mehr als ±11 K<br>Bei Spitzenlast nicht mehr als ±17 K von der ungestörten Untergrundtemperatur</td>
+                        <td class="col-5 p-2.5"></td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+
+                    <!-- CATEGORY: Dimensionierung -->
+                    <tr class="category-row">
+                        <td colspan="9" class="p-2.5 px-4 bg-brandNavy text-brandGreenLight font-bold">
+                            Dimensionierung
+                        </td>
+                    </tr>
+
+                    <!-- Sub: Bohrtiefenbegrenzung -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">Bohrtiefenbegrenzung</td>
+                        <td class="col-1 p-2.5 text-slate-900">Oberkante Rupelton</td>
+                        <td class="col-2 p-2.5 text-slate-900">Einzelfallprüfung Salzstrukturen, bzw. deren Hutgesteine</td>
+                        <td class="col-3 p-2.5 text-slate-900">Einzelfallprüfung geologisch; durch GLA festgelegt</td>
+                        <td class="col-4 p-2.5 text-slate-900">bei gerammten Sonden Deckschichten</td>
+                        <td class="col-5 p-2.5 text-slate-900">Einzelfallprüfung ab >200 m</td>
+                        <td class="col-6 p-2.5 text-slate-900">Einzelfallprüfung ≤ 200 m</td>
+                        <td class="col-7 p-2.5 text-slate-900">Standortabfrage</td>
+                        <td class="col-8 p-2.5 text-slate-900">Gips- und Anhydritführende Gesteine</td>
+                    </tr>
+
+                    <!-- Sub: analytische Simulation EED -->
+                    <tr class="bg-slate-50/50">
+                        <td class="subcategory-label p-2.5">analytische Simulation EED</td>
+                        <td class="col-1 p-2.5 text-slate-900">ab >30 kW oder falls 6 m Sondenabstand nicht eingehalten werden können</td>
+                        <td class="col-2 p-2.5 text-slate-900 font-bold">ab >30 kW</td>
+                        <td class="col-3 p-2.5"></td>
+                        <td class="col-4 p-2.5 text-slate-900 font-bold">ab >30 kW</td>
+                        <td class="col-5 p-2.5"></td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+                    <!-- Sub: Numerisches GWmodell -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">Numerisches GW-Modell</td>
+                        <td class="col-1 p-2.5 text-slate-900">nicht bis 30 kW</td>
+                        <td class="col-2 p-2.5 text-slate-900">zwischen 30–50 kW Einzelfallentscheidung<br><span class="font-bold">ab 50 kW Pflicht</span></td>
+                        <td class="col-3 p-2.5"></td>
+                        <td class="col-4 p-2.5 text-slate-900 font-bold">ab >100 kW</td>
+                        <td class="col-5 p-2.5 text-slate-900"><span class="font-bold">ab >50 kW Pflicht</span><br>zwischen 30–50 kW in sensiblen Lagen</td>
+                        <td class="col-6 p-2.5 text-slate-900 font-bold">>200 kW</td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+
+                    <!-- CATEGORY: Erkundung -->
+                    <tr class="category-row">
+                        <td colspan="9" class="p-2.5 px-4 bg-brandNavy text-brandGreenLight font-bold">
+                            Erkundung
+                        </td>
+                    </tr>
+
+                    <!-- Sub: TRT -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">TRT (Thermal Response Test)</td>
+                        <td class="col-1 p-2.5 text-slate-900 font-bold">ab ≥30 kW</td>
+                        <td class="col-2 p-2.5 text-slate-900">ab >100 kW Pilotbohrung und TRT</td>
+                        <td class="col-3 p-2.5"></td>
+                        <td class="col-4 p-2.5 text-slate-900 font-bold">ab >30 kW Pflicht</td>
+                        <td class="col-5 p-2.5 text-slate-900 font-bold">ab >30 kW pro Sondenfeld</td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+
+                    <!-- CATEGORY: Bohrtechnische Vorgaben -->
+                    <tr class="category-row">
+                        <td colspan="9" class="p-2.5 px-4 bg-brandNavy text-brandGreenLight font-bold">
+                            Bohrtechnische Vorgaben
+                        </td>
+                    </tr>
+
+                    <!-- Sub: Bohrdurchmesser -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">Bohrdurchmesser</td>
+                        <td class="col-1 p-2.5 text-slate-900">Mindestradius Ringraum: 30 mm<br>→ d_Sondenbündel + 60 mm = d_min Bohrloch</td>
+                        <td class="col-2 p-2.5 text-slate-900">Mindestradius Ringraum: 40 mm<br>→ d_Sondenbündel + Abstandhalter + 80 mm = d_min Bohrloch</td>
+                        <td class="col-3 p-2.5 text-slate-900">Mindestradius Ringraum: 30 mm<br>→ d_Sondenbündel + 60 mm = d_min Bohrloch<br>jedoch immer min. 150 mm</td>
+                        <td class="col-4 p-2.5 text-slate-900">Mindestradius Ringraum: 40 mm<br>→ d_Sondenbündel + Abstandhalter + 80 mm = d_min Bohrloch</td>
+                        <td class="col-5 p-2.5"></td>
+                        <td class="col-6 p-2.5"></td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+                    <!-- Sub: Hinterfüllmaterial -->
+                    <tr class="bg-slate-50/50">
+                        <td class="subcategory-label p-2.5">anforderungen Hinterfüllmaterial</td>
+                        <td class="col-1 p-2.5 text-slate-900">Werksgemischte, sedimentationsstabile Zementsuspension<br><br>Überwachung Abdichtvorgang automatisch oder durch externen Sachverständigen</td>
+                        <td class="col-2 p-2.5 text-slate-900">Frostbeständig</td>
+                        <td class="col-3 p-2.5 text-slate-900">Frostbeständig Tonmehl-Zement-Suspensionen</td>
+                        <td class="col-4 p-2.5 text-slate-900">Frost-Tau-Beständigkeit ist nachzuweisen falls Rücklauf &lt;0 °C</td>
+                        <td class="col-5 p-2.5 text-slate-900">Frost-tau-beständig</td>
+                        <td class="col-6 p-2.5 text-slate-900">Frostbeständig<br>k_f ≤ 1×10⁻⁸ m/s</td>
+                        <td class="col-7 p-2.5"></td>
+                        <td class="col-8 p-2.5"></td>
+                    </tr>
+
+                    <!-- Sub: Fach- / Rechtsgrundlage -->
+                    <tr>
+                        <td class="subcategory-label p-2.5">Fach- / Rechtsgrundlagen (Länderebene)</td>
+                        <td class="col-1 p-2.5 text-slate-900 font-medium">AwSV, BBergG, BWG, DIN, DVGW, GeolDG, LAWA, VDI, VwVwS, WHG, WschGebVO</td>
+                        <td class="col-2 p-2.5 text-slate-900 font-medium">BBergG, BbgBO, BbgUVPG, BbgWG, DIN, DVWG, LagerstG, VAwS, VDI</td>
+                        <td class="col-3 p-2.5 text-slate-900 font-medium">AwSV, BBergG, BremWG, DIN, DVGW, GDfB, GeolDG, VDI, WHG</td>
+                        <td class="col-4 p-2.5 text-slate-900 font-medium">AwSV, BUKEA, DIN, DVS, LAWA, StandAG, VDI, WHG</td>
+                        <td class="col-5 p-2.5 text-slate-900 font-medium">BBodSchG, BBergG, DIN, DVGW, DVS, LagestG, LWaG MV, VDI, VwVwS, WHG</td>
+                        <td class="col-6 p-2.5 text-slate-900 font-medium">AwSV, BBergG, BVOT, DVS, GeolDG, LAWA, NWG, SchuVO, StandAG, UVPG, VDI, WHG</td>
+                        <td class="col-7 p-2.5 text-slate-900 font-medium">BBergG, DVGW, LAWA, LWG, RAL-GZ, VaWS, VDI, WHG</td>
+                        <td class="col-8 p-2.5 text-slate-900 font-medium">AwSV, BBergG, DIN, DVGW, DVS, LAWA, LWG, RAL-GZ, VaWS, VDI, WHG</td>
+                    </tr>
+
+                    <!-- Sub: Besonderheiten -->
+                    <tr class="bg-slate-50/50">
+                        <td class="subcategory-label p-2.5">Besonderheiten & Auflagen</td>
+                        
+                        <!-- BE -->
+                        <td class="col-1 p-2.5 text-slate-900">
+                            <ul class="cell-list">
+                                <li>Leitfaden gilt für EWS bis 30 kW außerhalb von Wasserschutzgebieten</li>
+                                <li>Bei Spülbohrungen: geophysikalische Untersuchung der ersten Bohrung verpflichtend</li>
+                                <li>Zulässige Wärmeträgerzusätze: Ethylenglykol, Propylenglykol, Calciumchlorid</li>
+                                <li>Reine Kühlnutzung nicht zulässig, kombinierte Nutzung bedarf Einzelfallprüfung</li>
+                                <li>Bohrtiefen können bei Grundwasserversalzung begrenzt werden</li>
+                                <li>Zusätzliche Anforderungen in Gebieten mit unsicherer Rupelton-Tieflage</li>
+                            </ul>
+                        </td>
+
+                        <!-- BB -->
+                        <td class="col-2 p-2.5 text-slate-900">
+                            <ul class="cell-list">
+                                <li>Bohrungen >100 m oder >200 kW unterliegen dem Bergrecht</li>
+                                <li>Bohrungen in artesischen Bereichen verboten</li>
+                                <li>In WSZ III nur bis zur Deckschicht zulässig</li>
+                                <li>Abstandshalter alle 3 m (empfohlen 1,5 m) und zentrierte Sonden erforderlich</li>
+                                <li>Druck-/Strömungswächter mit Alarmfunktion vorgeschrieben</li>
+                                <li>Zusätzliche Vorgaben gemäß MLUV-Merkblatt Brandenburg</li>
+                            </ul>
+                        </td>
+
+                        <!-- HB -->
+                        <td class="col-3 p-2.5 text-slate-900">
+                            <ul class="cell-list">
+                                <li>Im Umkreis von 2 km zu Trinkwasserbrunnen nur oberhalb des Trinkwasserhorizonts bohren</li>
+                                <li>Einschränkungen bei artesischen Verhältnissen, Stockwerksbau, Altlasten oder Kampfmitteln möglich</li>
+                                <li>Zentrierhilfe erforderlich, wenn Verfüllrohr nicht zur Zentrierung dient</li>
+                                <li>Automatische Leckageüberwachung (Druckwächter) mit Pumpenabschaltung und Alarm vorgeschrieben</li>
+                            </ul>
+                        </td>
+
+                        <!-- HH -->
+                        <td class="col-4 p-2.5 text-slate-900">
+                            <ul class="cell-list">
+                                <li>Frostwächter mit Abschaltung bei −3 °C Solerücklauf erforderlich</li>
+                                <li>Bohrungen >100 m innerhalb von 2 km zu Trinkwasserbrunnen nur oberhalb des Trinkwasserhorizonts</li>
+                                <li>Bei Pilotsonden im Spülbohrverfahren: Gamma-Ray-Messung erforderlich</li>
+                                <li>Innenzentrierung und Außenzentrierungen (alle 5 m) verpflichtend</li>
+                                <li>Temperaturwächter im Zulauf bei Nutzung von Frostschutzmitteln erforderlich</li>
+                                <li>Druckwächter mit Leckageüberwachung vorgeschrieben</li>
+                            </ul>
+                        </td>
+
+                        <!-- MV -->
+                        <td class="col-5 p-2.5 text-slate-900">
+                            <ul class="cell-list">
+                                <li>Monitoring mit Berichten im 1., 2. und 5. Jahr, danach alle 5 Jahre</li>
+                                <li>Druck- und Temperaturwächter verpflichtend</li>
+                                <li>Ab 30 kW Erkundungsbohrung mit TRT oder vergleichbarem Verfahren erforderlich</li>
+                                <li>Einflussbereich der Temperaturänderung bewerten</li>
+                                <li>Für große Anlagen numerische Modellierung erforderlich</li>
+                            </ul>
+                        </td>
+
+                        <!-- NI -->
+                        <td class="col-6 p-2.5 text-slate-900">
+                            <p class="font-semibold mb-1">Abschätzung des Einflussbereichs der Temperaturveränderung im Untergrund/Grundwasser als Grundlage für das erforderliche Monitoring:</p>
+                            <ul class="cell-list">
+                                <li><strong>Klein (>30–≤100 kW):</strong> Abschätzung anhand von Erfahrungswerten aus Literatur</li>
+                                <li><strong>Mittel (>100–≤200 kW):</strong> Berücksichtigung von Grundwasserfließrichtung und Abstandsgeschwindigkeit</li>
+                                <li><strong>Groß (>200 kW):</strong> Numerische Modellierung von Grundwasserströmung und Wärmetransport; Darstellung der Temperaturisolinien > ±1 K in relevanten Tiefenschnitten</li>
+                            </ul>
+                        </td>
+
+                        <!-- ST -->
+                        <td class="col-7 p-2.5 text-slate-900">
+                            <p class="text-[10px] text-slate-500 italic mb-1">Ehemaliger Leitfaden: Erdwärmenutzung in Sachsen-Anhalt – Stand: 03/2012</p>
+                            <ul class="cell-list">
+                                <li>Leitfaden gilt nur bis 30 kW</li>
+                                <li>Temperaturen unter 0 °C im Verpresskörper müssen auch bei Spitzenlasten ausgeschlossen sein</li>
+                                <li>Temperatur- und Druckwächter verpflichtend</li>
+                                <li>Innerhalb von 1 km zu Trinkwasserbrunnen darf der schützende Stauer nicht durchteuft werden, >1 km unter Auflagen</li>
+                            </ul>
+                        </td>
+
+                        <!-- SH -->
+                        <td class="col-8 p-2.5 text-slate-900">
+                            <ul class="cell-list">
+                                <li>Ausgeglichene thermische Bilanz ist nachzuweisen</li>
+                                <li>Ab >30 kW Monitoring mit Messstellen, Datenlogger und Jahresbericht erforderlich</li>
+                                <li>Bis 30 kW häufig kein Erlaubnisverfahren erforderlich</li>
+                                <li>Druckwächter mit Leckageüberwachung vorgeschrieben</li>
+                                <li>Für größere Sondenfelder thermische Wechselwirkungen der Sonden untereinander, sowie thermische Reichweite berechnen</li>
+                                <li>Gleichmäßige Durchströmung aller Sonden sicherstellen, z.B. über Tacosetter; v.a. bei großen Anlagen Pflicht</li>
+                                <li>Druck- und Temperaturwächter Pflicht</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- BOTTOM SECTION: OVERARCHING LEGAL & TECHNICAL FRAMEWORK -->
+        <div class="bg-slate-50 border-2 border-brandNavy rounded-xl p-5 md:p-6 shadow-sm">
+            <div class="flex items-center gap-3 mb-4 pb-2 border-b border-slate-300">
+                <div class="p-2 bg-brandNavy text-brandGreenLight rounded-lg">
+                    <i data-lucide="scale" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-extrabold text-brandNavy uppercase tracking-wide">Übergeordnete genehmigungsrechtliche Rahmenbedingungen (bundesweit)</h3>
+                    <p class="text-xs text-slate-500">Zentrale Gesetze, Regeln und Verordnungen ohne Erläuterungen</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- BOX 1: RECHTSGRUNDLAGEN -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs">
+                    <div class="flex items-center gap-2 text-brandNavy font-bold text-xs uppercase mb-3 pb-1 border-b border-brandGreen">
+                        <i data-lucide="book-open" class="w-4 h-4 text-brandGreenMuted"></i>
+                        Rechtsgrundlagen (Bundesweite Gesetze)
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">BBergG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">BBodSchG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">BNatSchG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">GeoBG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">GeoLdG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">KrWG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">LagestG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">StandAG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">UVPG</span>
+                        <span class="legal-badge px-2.5 py-1 bg-brandNavy text-white font-bold text-xs rounded border border-brandNavy">WHG</span>
+                    </div>
+                </div>
+
+                <!-- BOX 2: TECHNISCHE ANFORDERUNGEN -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs">
+                    <div class="flex items-center gap-2 text-brandNavy font-bold text-xs uppercase mb-3 pb-1 border-b border-brandGreen">
+                        <i data-lucide="wrench" class="w-4 h-4 text-brandGreenMuted"></i>
+                        Technische Anforderungen
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="legal-badge px-3 py-1.5 bg-brandGreenLight text-brandNavy font-black text-xs rounded border border-brandGreen/40">DVGW</span>
+                        <span class="legal-badge px-3 py-1.5 bg-brandGreenLight text-brandNavy font-black text-xs rounded border border-brandGreen/40">VDI</span>
+                        <span class="legal-badge px-3 py-1.5 bg-brandGreenLight text-brandNavy font-black text-xs rounded border border-brandGreen/40">LAWA</span>
+                    </div>
+                </div>
+
+                <!-- BOX 3: RELEVANTE VERORDNUNGEN -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs">
+                    <div class="flex items-center gap-2 text-brandNavy font-bold text-xs uppercase mb-3 pb-1 border-b border-brandGreen">
+                        <i data-lucide="file-check" class="w-4 h-4 text-brandGreenMuted"></i>
+                        Relevante Verordnungen
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="legal-badge px-2.5 py-1 bg-slate-100 text-slate-800 font-bold text-xs rounded border border-slate-300">AwSV</span>
+                        <span class="legal-badge px-2.5 py-1 bg-slate-100 text-slate-800 font-bold text-xs rounded border border-slate-300">DVS</span>
+                        <span class="legal-badge px-2.5 py-1 bg-slate-100 text-slate-800 font-bold text-xs rounded border border-slate-300">RAL-GZ</span>
+                        <span class="legal-badge px-2.5 py-1 bg-slate-100 text-slate-800 font-bold text-xs rounded border border-slate-300">SKZ</span>
+                        <span class="legal-badge px-2.5 py-1 bg-slate-100 text-slate-800 font-bold text-xs rounded border border-slate-300">VaWS</span>
+                        <span class="legal-badge px-2.5 py-1 bg-slate-100 text-slate-800 font-bold text-xs rounded border border-slate-300">VwVwS</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FOOTER BAR -->
+        <div class="mt-6 pt-4 border-t border-slate-200 flex flex-wrap justify-between items-center text-[11px] text-slate-500">
+            <div>
+                <span>Stand der Daten: Gemäß den jeweiligen Landesleitfäden und Verordnungen</span>
+            </div>
+            <div class="font-medium text-brandNavy">
+                <span>Genehmigungsrechtliche Übersicht • Erdwärmesonden Norddeutschland</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT FOR INTERACTIVITY -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Highlight column on click
+        let activeCol = null;
+        function highlightColumn(colNum) {
+            const allCells = document.querySelectorAll('#mainTable td, #mainTable th');
+            
+            if (activeCol === colNum) {
+                // Remove highlight if clicked again
+                allCells.forEach(cell => cell.classList.remove('highlight-col'));
+                activeCol = null;
+                return;
+            }
+
+            activeCol = colNum;
+            allCells.forEach(cell => cell.classList.remove('highlight-col'));
+
+            const targetCells = document.querySelectorAll(`#mainTable .col-${colNum}`);
+            targetCells.forEach(cell => cell.classList.add('highlight-col'));
+        }
+
+        // Live Table Search Filter
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('mainTable');
+            const rows = table.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                if (row.classList.contains('category-row')) return;
+                
+                const text = row.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
